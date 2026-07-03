@@ -1,36 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap');
+
+
 body {
     background-color: aliceblue;
     align-items: center;
     justify-content: center;
     display: flex;
 }
+.h1 {
+    font-family: "Google Sans", sans-serif;
+}
+.hi {
+    font-family: "Google Sans", sans-serif;
+}
+.bbb {
+font-family: "Google Sans", sans-serif;
+}
 .inpur {
     border-radius: 30px;
     border: none;
 background-color: aquamarine;
 padding: 10px 20px 10px;
-padding: 8px;
- font-size: 16px;
 transition: all 0.3s ease;
 }
 .butto {
     position: relative;
-    background-color: black;
+    background-color: aliceblue;
     border: 2px solid black;
-    color: white;
     border-radius: 30px;
     padding: 5px 10px 5px;
     font-weight: bold;
     transition: all 0.3s ease;
-    padding: 8px 15px;
-     margin-left: 10px;
-      cursor: pointer;
+    margin-left: 10px;
     box-shadow: 0 10px 20px black;
+    font-family: "Google Sans", sans-serif;
 }
 .butto:active {
     transform: translateY(5px);
-     background-color: aliceblue;
-     color: black;
+    background-color: black;
+    color: white;
 }
 .inpur:hover {
  transform: scale(1.03);
@@ -39,16 +47,15 @@ transition: all 0.3s ease;
 }
 .bum {
     color: white;
-    background-color: black;
+    background-color: red;
     border-radius: 30px;
     box-shadow: 0 10px 20px black;
     border: 2px solid white;
-    margin-left: 20px;
-    padding: 5px 10px;
-    font-weight: bold;
     transition: all 0.3s ease;
+    font-family: "Google Sans", sans-serif;
 }
 .bum:active {
-    transform: translateY(10px);
-    background-color: red;
+    transform: translateY(5px);
+    background-color: black;
+
 }

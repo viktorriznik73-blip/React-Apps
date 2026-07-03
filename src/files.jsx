@@ -34,13 +34,21 @@ function ToDoList() {
             className='inpur' 
             value={inputvalue} 
             onChange={(e) => setInputValue(e.target.value)} 
+<<<<<<< HEAD
             placeholder='type your text here'
+=======
+            placeholder='type your text there'
+>>>>>>> 6c82c904c79d118175ea38907551d989ac6bd40d
             style={{ padding: '8px', fontSize: '16px' }}
          />
          <button className='butto' onClick={AddNewTask} style={{ padding: '8px 15px', marginLeft: '10px', cursor: 'pointer' }}>
             NEW Task
          </button>
+<<<<<<< HEAD
          <ul style={{ listStyleType: 'none', padding: '0', marginTop: '20px' }}>
+=======
+         <ul style={{ listStyleType: 'none', padding: 0, marginTop: '20px' }}>
+>>>>>>> 6c82c904c79d118175ea38907551d989ac6bd40d
             {todos.map((todo) => (
                <li key={todo.id} style={{ margin: '5px 0', fontSize: '18px' }}>
                   {todo.text}

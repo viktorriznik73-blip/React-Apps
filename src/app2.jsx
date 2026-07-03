@@ -4,12 +4,21 @@ import './App.css'
 // зделать функцию для кнопки
 // зделать функцию для таймера
 
+<<<<<<< HEAD
 function HeaderTitle() {
    return ( 
       <div style={{textAlign: 'center', marginTop: '20px'}}>
    <h1>Timer test</h1>
       </div>
    )
+=======
+ function HeaderTitle() {
+  return (
+    <div style={{textAlign: 'center', marginTop: '20px'}}>
+        <h1>Timer test</h1>
+    </div>
+  )
+>>>>>>> 6c82c904c79d118175ea38907551d989ac6bd40d
 }
 export default function ShowTimer() {
    const [timer, setTimer] = useState("");
@@ -35,6 +44,7 @@ export default function ShowTimer() {
          }
    };
 
+<<<<<<< HEAD
    return (
       <div style={{textAlign: 'center'}}>
          <HeaderTitle />
@@ -44,3 +54,16 @@ export default function ShowTimer() {
       </div>
    )
 }
+=======
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <HeaderTitle />
+
+            <button onClick={handleToggle} style={{ padding: '10px 20px', fontSize: '18px', cursor: 'pointer' }}>
+                {isRunning ? `Now is ${timer}` : "Start timer"}
+            </button>
+       
+        </div>
+    )
+    }
+>>>>>>> 6c82c904c79d118175ea38907551d989ac6bd40d
