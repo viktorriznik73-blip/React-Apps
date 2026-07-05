@@ -18,6 +18,11 @@ function App() {
     setOperation(op);
     setCurrentValue('0')
   }
+  function handleDecimal() {
+    if (currentValue.includes('.') === false) {
+        setCurrentValue(currentValue + '.')
+    }
+  }
   function clearCalculator() {
    setCurrentValue('0')
    setPreviousValue(null)
@@ -44,23 +49,28 @@ let result = 0;
     setOperation(null);
   }
   return (
-    <div>{currentValue}
-    <button onClick={() => handleNumber('1')}>1</button>
-    <button onClick={() => handleNumber('2')}>2</button>
-    <button onClick={() => handleNumber('3')}>3</button>
-    <button onClick={() => handleNumber('4')}>4</button>
-    <button onClick={() => handleNumber('5')}>5</button>
-    <button onClick={() => handleNumber('6')}>6</button>
-    <button onClick={() => handleNumber('7')}>7</button>
-    <button onClick={() => handleNumber('8')}>8</button>
-    <button onClick={() => handleNumber('9')}>9</button>
-    <button onClick={() => handleNumber('0')}>0</button>
-    <button onClick={() => handleOperator('+')}>+</button>
-    <button onClick={() => handleOperator('-')}>-</button>
-    <button onClick={() => handleOperator('/')}>/</button>
-    <button onClick={() => handleOperator('*')}>*</button>
-    <button onClick={calculateResult}>=</button>
-    <button onClick={clearCalculator}>C</button>
+    <div>
+    <h1 id='calc'>Calculator</h1>
+    <div className='calculator'>
+    <div className='display'>{currentValue} </div>
+    <button className='butto' onClick={() => handleNumber('1')}>1</button>
+    <button className='butto' onClick={() => handleNumber('2')}>2</button>
+    <button className='butto' onClick={() => handleNumber('3')}>3</button>
+    <button className='butto'  onClick={() => handleNumber('4')}>4</button>
+    <button className='butto' onClick={() => handleNumber('5')}>5</button>
+    <button className='butto' onClick={() => handleNumber('6')}>6</button>
+    <button className='butto' onClick={() => handleNumber('7')}>7</button>
+    <button className='butto' onClick={() => handleNumber('8')}>8</button>
+    <button className='butto' onClick={() => handleNumber('9')}>9</button>
+    <button className='butto' onClick={() => handleNumber('0')}>0</button>
+    <button className='butto' onClick={() => handleOperator('+')}>+</button>
+    <button className='butto' onClick={() => handleOperator('-')}>-</button>
+    <button className='butto' onClick={() => handleOperator('/')}>/</button>
+    <button className='butto' onClick={() => handleOperator('*')}>*</button>
+    <button className='butto' onClick={handleDecimal}>,</button>
+    <button className='butto' onClick={calculateResult}>=</button>
+    <button className='butto' onClick={clearCalculator}>C</button>
+    </div>
     </div>
   )
 }
