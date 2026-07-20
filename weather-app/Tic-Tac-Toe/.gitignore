@@ -1,6 +1,5 @@
-
+.env
 .env.local
-env.production.local
 # Logs
 logs
 *.log
@@ -14,6 +13,7 @@ node_modules
 dist
 dist-ssr
 *.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,0 +1,13 @@
+
+h1 {
+    transition: opacity 0.5s;
+    color: red;
+    text-align: center;
+}
+.hidden {
+    opacity: 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}

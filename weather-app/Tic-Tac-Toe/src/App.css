@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+}
+.board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 80px); /* Фиксированный размер для точности линии */
+    grid-template-rows: repeat(3, 80px);
+    gap: 10px;
+    padding: 10px;
+}
+.button1 {
+    position: relative;
+    background-color: black;
+    color: aliceblue;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 2rem;
+    align-items: center;     
+    justify-content: center;
+}
+.button1:hover {
+    transform: scale(1.03);
+    background-color: aliceblue;
+    color: black;
+    border: 2px solid black;
+    box-shadow: 0px 10px 20px;
+}
+.button2 {
+    position: relative;
+    font-family: "Google Sans", sans-serif;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    text-align: center;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 12px 30px;
+    margin-bottom: 5px;
+    border-radius: 40px;
+    align-self: center; /* Центрируем кнопку в flex-контейнере */
+}
+.button2:active {
+  transform: translateY(4px);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid aliceblue;
+    box-shadow: 0px 15px 20px black;
+}
+h2 {
+    color: black;
+    font-family: "Lato", sans-serif;
+    font-size: 15px;
+}
+h1 {
+    color: black;
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+}
+.game-container {
+    gap: 10px;
+     display: flex;
+    flex-direction: column; /* Элементы встают друг под друга */
+    align-items: center;    /* Центрирует доску и кнопку Reset по горизонтали */
+    justify-content: center; /* Изменил на column, чтобы кнопка Reset была под доской */
+    width: fit-content;
+    margin: 15px auto;
+    background-color: #f5f5f5;
+    border: 2px solid rgb(0, 0, 0);
+    box-shadow: 0 20px 40px rgb(0, 0, 0);
+    border-radius: 20px;
+}
+.winning-line {
+    position: absolute;
+    background-color: #ff0000; /* Цвет линии (красный) */
+    border-radius: 4px;
+    box-shadow: 0 5px 10px red;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+/* Горизонтальные линии */
+.line-0 { height: 6px; width: 260px; top: 47px; left: 10px; }
+.line-1 { height: 6px; width: 260px; top: 137px; left: 10px; }
+.line-2 { height: 6px; width: 260px; top: 227px; left: 10px; }
+
+/* Вертикальные линии */
+.line-3 { width: 6px; height: 260px; top: 10px; left: 47px; }
+.line-4 { width: 6px; height: 260px; top: 10px; left: 137px; }
+.line-5 { width: 6px; height: 260px; top: 10px; left: 227px; }
+/* Диагонали */
+.line-6 {
+    height: 6px; width: 340px; top: 137px; left: -30px;
+    transform: rotate(45deg);
+}
+.line-7 {
+height: 6px; width: 340px; top: 137px; left: -30px;
+transform: rotate(-45deg);
+}

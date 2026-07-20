@@ -1,0 +1,61 @@
+body {
+    display: flex;
+}
+.message-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 10px 0;
+}
+.message-wrapper.user {
+    justify-content: flex-end;
+}
+.message-wrapper.bot {
+    justify-content: flex-start;
+}
+.message-bubble.user {
+    background-color: gray;
+    color: white;
+    border: 2px solid aliceblue;
+    border-radius: 30px;
+  padding: 10px 10px 10px;
+  border-radius: 30px;
+}
+.message-bubble.bot {
+  background-color: #171d23;
+  border: 2px solid aliceblue;
+  color: white;
+  padding: 10px 10px 10px;
+  border-radius: 30px;
+}
+.dot-container {
+    display: flex;
+    gap: 4px;
+    padding: 8px 12px;
+    background-color: #000000;
+    border-radius: 12px;
+    width: fit-content;
+    justify-content: flex-start;
+}
+.dot-container span {
+     top: 280px;
+    width: 6px;
+    height: 6px;
+    background-color: #f5f5f5;
+border-radius: 50%;
+display: inline-block;
+animation: wave 1.3s infinite ease-in-out;
+}
+.dot-container span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+.dot-container span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+@keyframes wave {
+    0%, 60%, 100% {
+        transform: translateY(0px);
+    }
+    30% {
+        transform: translateY(-6px);
+    }
+}
