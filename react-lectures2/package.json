@@ -1,6 +1,5 @@
 {
-  "name": "ai",
-  "name": "tic-tac-toe",
+  "name": "react-lectures2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "openai": "^6.46.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
