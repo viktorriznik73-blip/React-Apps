@@ -35,7 +35,7 @@ function App() {
       }
       }
    } 
-   if (state.score === 10) {
+   if (state.score === 20) {
     return (
     <div id='winner'>
       You won the game!

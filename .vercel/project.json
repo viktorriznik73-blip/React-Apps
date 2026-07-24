@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_BUZ87ciH3eo9AAhlF5fvU5CdobZU",
+  "orgId": "team_kPEzDe89SRZ7ZSd5zZTtzJy3",
+  "projectName": "weather-app",
+  "settings": {
+    "createdAt": 1784538734309,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": "true",
+    "outputDirectory": "dist",
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
