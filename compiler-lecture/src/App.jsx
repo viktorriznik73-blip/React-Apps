@@ -1,21 +1,13 @@
-import { useMemo, useCallback, memo } from 'react'
+import { useState } from 'react'
 import './App.css'
-// Testing React Compiler Example
+import Gallery from './example.jsx'
+import { Profile } from './profile.jsx'
 
-function ExpensiveComponent({ data, onclick}) {
-  const processedData = expensiveProcessing(data);
-  
-
-const handleClick = useCallback = (item) => {
-  onclick(item.id);
+export default function App() {
+  return (
+    <div>
+ <Profile />
+ <Gallery />
+ </div>
+  )
 }
-
-return (
-  <div>
-    {processedData.map(item => {
-      <Item key={item.id} onclick={() => handleClick(item)} />
-    })}
-  </div>
-)
-}
-export default ExpensiveComponent;
