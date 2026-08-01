@@ -1,13 +1,50 @@
 import { useState } from 'react'
 import './App.css'
-import Gallery from './example.jsx'
-import { Profile } from './profile.jsx'
+import { people  } from './data.jsx'
+import { getImageUrl } from './utils.jsx'
 
-export default function App() {
+export default function List() {
+  const chemists = people.filter(person =>
+    person.profession === 'chemist'
+  );
+  const everyoneElse = people.filter(person =>
+    person.profession !== 'chemist'
+  );
   return (
-    <div>
- <Profile />
- <Gallery />
- </div>
-  )
+    <article>
+      <h1>Scientists</h1>
+      <h2>Chemists</h2>
+      <ul>
+        {chemists.map(person =>
+          <li key={person.id}>
+            <img
+              src={getImageUrl(person)}
+              alt={person.name}
+            />
+            <p>
+              <b>{person.name}:</b>
+              {' ' + person.profession + ' '}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        )}
+      </ul>
+      <h2>Everyone Else</h2>
+      <ul>
+        {everyoneElse.map(person =>
+          <li key={person.id}>
+            <img
+              src={getImageUrl(person)}
+              alt={person.name}
+            />
+            <p>
+              <b>{person.name}:</b>
+              {' ' + person.profession + ' '}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        )}
+      </ul>
+    </article>
+  );
 }
