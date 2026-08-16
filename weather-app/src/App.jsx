@@ -25,16 +25,43 @@ const fetchWeather = async (e) => {
   } catch (err) {
   setError(err.message)
   }
+  }
+const fetchWeatherByLocation = () => {
+ if (!navigator.geolocation) {
+  setError('Try geolocation again!')
+  return;
+ }
+ setError('')
+ setWeather(null)
+ navigator.geolocation.getCurrentPosition(async (position) => {
+  const { latitude, longitude } = position.coords
+  try {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
+  if (!response.ok) {
+throw new Error('Mistake try again!')
+  }
+  const data = await response.json()
+setWeather(data)
+setCity(data.name)
+  } catch (err) {
+     setError(err.message)
+  }
 }
-
+ );
+}
+ 
 return (
   <div className='app-container'>
  <h2 className='h'>Weather App</h2>
  <form onSubmit={fetchWeather} className='search-form'>
-  <input className='inpur' type="text" placeholder='Type your Text'  value={city} onChange={(e) => setCity(e.target.value)}/><button onClick={() => setCity('')} className='experiment'>×</button>
+  <div className='input-wrapper'>
+  <input className='inpur' type="text" placeholder='Search'  value={city} onChange={(e) => setCity(e.target.value)}/>
+  <button onClick={() => setCity('')} className='experiment' type='button'>×</button>
+  </div>
   <button className='butto' type='submit'>
     Search
   </button>
+  <button className='geolocation' onClick={fetchWeatherByLocation} type='button'>Weather by Geolocation 📍</button>
    </form>
   {error && <p className='error-message'>{error}</p>}
   {weather && (

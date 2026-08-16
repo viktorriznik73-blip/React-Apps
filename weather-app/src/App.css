@@ -24,11 +24,15 @@ body {
 
 .search-form {
     padding: 10px 20px;
-    max-width: 500px;
+    max-width: 600px;
     background-color: aqua;
     border: 2px solid aliceblue;
     border-radius: 40px;
     margin: 0 auto;
+    position: relative;
+  display: inline-flex; /* Кнопки встанут в ряд */
+  align-items: center;  /* Выравнивание кнопок по одной линии */
+  gap: 20px;
 }
 .error-message {
     position: relative;
@@ -74,6 +78,9 @@ flex-grow: 1;
   transform: scale(1.03);
   background-color: black;
 }
+.input-wrapper {
+    display: flex;
+}
 .butto {
     padding: 8px 20px;
     border-radius: 50px;
@@ -88,16 +95,28 @@ flex-grow: 1;
    
 }
 .experiment {
-position: relative;
  background-color: #000000;
   color: white;
-  border: 3px white;
-  border-radius: 50px;
+  border-radius: 50%;
   border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.geolocation {
+    background-color: rgb(228, 151, 10);
+      color: white;
+  border-radius: 30px;
+border: none;
   padding: 8px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  gap: 30px;
+}
+.geolocation:active {
+    transform: translateY(3px);
+    background-color: black;
+    color: white;
+    border: 2px white;
 }
 .butto:active {
     transform: translateY(3px);
@@ -121,10 +140,35 @@ position: relative;
         gap: 10px;
         border: none;
     }
+    .input-wrapper {
+   display: flex;
+   position: relative;
+   align-items: center;
+   width: 100%;
+    }
     .inpur {
     width: 100%;
     margin-right: 0;
     box-sizing: border-box;
+    padding-right: 40px;
+    }
+    .experiment {
+     background-color: #000000;
+    color: white;
+    border-radius: 50%; /* Сделаем его круглым */
+    border: none;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
     }
     .butto {
         width: 100%;
@@ -132,4 +176,5 @@ position: relative;
     .weather-block {
         padding: 20px 10px;
     }
+   
 }
