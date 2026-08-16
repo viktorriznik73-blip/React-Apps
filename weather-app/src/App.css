@@ -21,6 +21,7 @@ body {
     padding: 20px;
    text-align: center;
 }
+
 .search-form {
     padding: 10px 20px;
     max-width: 500px;
@@ -64,6 +65,7 @@ margin-right: 20px;
 width: 200px;
 height: 30px;
 box-shadow: 0 5px 10px black;
+flex-grow: 1;
 }
 .inpur::placeholder {
     color: white;
@@ -83,10 +85,28 @@ box-shadow: 0 5px 10px black;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
+   
+}
+.experiment {
+position: relative;
+ background-color: #000000;
+  color: white;
+  border: 3px white;
+  border-radius: 50px;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 30px;
 }
 .butto:active {
     transform: translateY(3px);
     background-color: black;
+    color: white;
+}
+.experiment:active {
+    transform: translateY(3px);
+    background-color: red;
     color: white;
 }
 @media (max-width: 600px) {

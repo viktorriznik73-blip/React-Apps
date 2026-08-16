@@ -10,9 +10,6 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
   const [error, setError] = useState('');
-
-
-
 const fetchWeather = async (e) => {
   e.preventDefault();
   setError('')
@@ -29,11 +26,12 @@ const fetchWeather = async (e) => {
   setError(err.message)
   }
 }
+
 return (
   <div className='app-container'>
  <h2 className='h'>Weather App</h2>
  <form onSubmit={fetchWeather} className='search-form'>
-  <input className='inpur' type="text" placeholder='Type your Text'  value={city} onChange={(e) => setCity(e.target.value)}/>
+  <input className='inpur' type="text" placeholder='Type your Text'  value={city} onChange={(e) => setCity(e.target.value)}/><button onClick={() => setCity('')} className='experiment'>×</button>
   <button className='butto' type='submit'>
     Search
   </button>
