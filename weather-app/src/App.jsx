@@ -33,6 +33,7 @@ const fetchWeatherByLocation = () => {
  }
  setError('')
  setWeather(null)
+ setForeCast(null)
  navigator.geolocation.getCurrentPosition(async (position) => {
   const { latitude, longitude } = position.coords
   try {
@@ -51,6 +52,7 @@ if (forecastResponse.ok) {
 }
   } catch (err) {
      setError(err.message)
+     setForeCast(null)
   }
 }
  );
@@ -59,6 +61,7 @@ if (forecastResponse.ok) {
  const getWeatherForecast = async () => {
 setError('');
 setWeather(null);
+setForeCast(null)
 try {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`)
   if (!response.ok) {
@@ -68,6 +71,7 @@ try {
   setForeCast(data)
 } catch (err) {
   setError(err.message)
+  setForeCast(null)
 }
  }
  const handleSearch = (e) => {
@@ -102,9 +106,7 @@ return (
   )}
     {forecast && (
     <div className='forecast-container'>
-      {forecast.list
-      .filter(item => item.dt_txt.includes('14:00:00'))
-      .map((item, index) => (
+      {forecast.list.map((item, index) => (
         <div key={index} className='forecast-card'>
           <p>{item.dt_txt}</p>
           <p>{Math.round(item.main.temp)}°C</p>
