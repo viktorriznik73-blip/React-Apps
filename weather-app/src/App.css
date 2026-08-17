@@ -165,7 +165,7 @@ border: 2px solid aliceblue
         display: flex;
         flex-direction: column;
         gap: 10px;
-        width: 500px;
+        width: 320px;
         border: none;
     }
     .input-wrapper {
@@ -202,7 +202,7 @@ border: 2px solid aliceblue
         width: 100%;
     }
     .weather-block {
-        padding: 20px 170px ;
+        padding: 20px 100px ;
     }
     .experiment:hover {
     background-color: red;
@@ -224,7 +224,7 @@ border: 2px solid aliceblue
   gap: 15px;
   overflow-x: auto; /* если карточек много, появится удобная прокрутка вбок */
   margin-top: 20px ;
-  max-width: 500px;
+  max-width: 320px;
   border-radius: 40px;
   padding: 12px;
  background: rgba(255, 255, 255, 0.15)
