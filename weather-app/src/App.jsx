@@ -10,8 +10,8 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
   const [error, setError] = useState('');
-const fetchWeather = async (e) => {
-  e.preventDefault();
+  const [forecast, setForeCast] = useState(null)
+const fetchWeather = async () => {
   setError('')
   setWeather(null)
   try {
@@ -43,17 +43,42 @@ throw new Error('Mistake try again!')
   const data = await response.json()
 setWeather(data)
 setCity(data.name)
+
+const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${data.name}&appid=${API_KEY}&units=metric`);
+if (forecastResponse.ok) {
+  const forecastData = await forecastResponse.json()
+  setForeCast(forecastData);
+}
   } catch (err) {
      setError(err.message)
   }
 }
  );
 }
- 
+
+ const getWeatherForecast = async () => {
+setError('');
+setWeather(null);
+try {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`)
+  if (!response.ok) {
+    throw new Error("Mistake try again!")
+  }
+  const data = await response.json()
+  setForeCast(data)
+} catch (err) {
+  setError(err.message)
+}
+ }
+ const handleSearch = (e) => {
+    e.preventDefault();
+    fetchWeather();
+    getWeatherForecast();
+  };
 return (
   <div className='app-container'>
  <h2 className='h'>Weather App</h2>
- <form onSubmit={fetchWeather} className='search-form'>
+ <form onSubmit={handleSearch} className='search-form'>
   <div className='input-wrapper'>
   <input className='inpur' type="text" placeholder='Search'  value={city} onChange={(e) => setCity(e.target.value)}/>
   <button onClick={() => setCity('')} className='experiment' type='button'>×</button>
@@ -75,6 +100,18 @@ return (
     </div>
     </div>
   )}
+    {forecast && (
+    <div className='forecast-container'>
+      {forecast.list
+      .filter(item => item.dt_txt.includes('14:00:00'))
+      .map((item, index) => (
+        <div key={index} className='forecast-card'>
+          <p>{item.dt_txt}</p>
+          <p>{Math.round(item.main.temp)}°C</p>
+        </div>
+      ))}
+    </div>
+    )}
   </div>
 )
 }
