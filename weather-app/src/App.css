@@ -39,7 +39,7 @@ body {
 }
 .error-message {
     position: relative;
-    padding: 1px 1px;
+    padding: 10px 10px;
     background-color: red;
     top: 10px;
     color: white;

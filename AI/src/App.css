@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+     min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: rgb(61, 58, 58);
+    margin: 0 auto;
+}
+input {
+    position: relative;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 20px 20px 15px;
+    border-radius: 50px;
+    align-items: center;     
+    justify-content: center;
+    text-align: center;
+    margin-top: 300px;
+    margin-right: 20px;
+    width: 400px;
+    font-size: 15px;
+}
+input:hover {
+    transform: scale(1.03);
+    background-color: black;
+    color: white;
+}
+button {
+    border-radius: 50px;
+    background-color: rgb(32, 32, 125);
+    color: white;
+    border: none;
+    padding: 20px 30px 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px aliceblue;
+}
+button:active {
+    transform: translateY(10px);
+    background-color: rgb(30, 30, 176);
+}
+h1 {
+   font-family: "Google Sans", sans-serif;
+   font-size: 2rem;
+}
