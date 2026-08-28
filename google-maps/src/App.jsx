@@ -65,8 +65,8 @@ function handleMyLocation() {
         <button onClick={() => setCityName('')} className='city-delete' type='button'>×</button>
         </div>
           {error && <p className='error'>{error}</p>}
-    <input type="submit" className='input'/>
-     <button onClick={handleMyLocation} className='location'>Location</button>
+    <button type="submit" className='input'>Search</button>
+<button type="button" onClick={handleMyLocation} className='location'>Location</button> 
       </form>
     <MapContainer center={userCenter} zoom={13} className='container'>
      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
