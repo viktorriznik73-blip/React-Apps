@@ -39,7 +39,7 @@ useEffect(() => {
         if (response.ok && data.responseData) {
           setTargetText(data.responseData.translatedText);
         } else {
-          setError("Translating Mistake try again!");
+          setError("Translating Mistake try!");
         }
       } catch (err) {
         setError("Server Mistake try again!");
