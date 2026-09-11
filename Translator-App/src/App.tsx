@@ -39,14 +39,14 @@ useEffect(() => {
         if (response.ok && data.responseData) {
           setTargetText(data.responseData.translatedText);
         } else {
-          setError("Translating Mistake!");
+          setError("Translating Mistake try again!");
         }
       } catch (err) {
-        setError("Server Mistake!");
+        setError("Server Mistake try again!");
       } finally {
         setIsLoading(false);
       }
-    }, 600);
+    }, 300);
     return () => clearTimeout(timer);
   }, [sourceText, sourceLang, targetLang]);
   return ( 
@@ -62,7 +62,13 @@ useEffect(() => {
               </option>
             ))}
           </select>
+          <div className="textarea-container">
           <textarea className='textarea1' value={sourceText} onChange={(e) => setSourceText(e.target.value)} placeholder='Enter text'/>
+            {sourceText && (
+              <button className='button1' onClick={() => setSourceText('')}>X</button>
+            )}
+            </div>
+
         </div>
 
         <div className='div3'>
