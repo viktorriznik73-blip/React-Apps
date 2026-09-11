@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+h1 {
+  font-family: "Google Sans", sans-serif;
+}
+.div1 {
+  display: flex;
+   gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.div2, .div3 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+.div4 {
+  margin-top: 20px;
+  text-align: center;
+}
+.select1, .select2 {
+  padding: 8px; 
+  font-size: 14px;
+   border-radius: 5px;
+   width: 100%;
+   box-sizing: border-box;
+   background-color: aliceblue;
+   color: black;
+   transition: all 0.3s ease;
+}
+.select1:hover {
+  transform: scale(1.03);
+   background-color: black;
+   color: aliceblue;
+}
+.select2:hover {
+  transform: scale(1.03);
+   background-color: black;
+   color: aliceblue;
+}
+.textarea1 {
+  width: 100%;
+   height: 150px;
+    padding: 10px;
+     font-size: 16px;
+      border-radius: 8px;
+       border: none;
+       color: #fff;
+   box-sizing: border-box;
+   resize: vertical;
+   transition: all 0.3s ease;
+}
+.textarea2 {
+width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  box-sizing: border-box;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+  .div1 {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+  .textarea1, .textarea2 {
+    width: 96%;
+  }
+  .select1, .select2 {
+    width: 96%;
+  }
+}
