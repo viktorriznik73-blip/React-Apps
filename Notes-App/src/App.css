@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+body {
+  background-color: black;
+}
+h1 {
+   font-family: "Google Sans", sans-serif;;
+}
+.input-wrapper textarea {
+  width: 22%;
+  box-sizing: border-box;
+  padding-right: 40px; 
+  padding-bottom: 40px; 
+}
+.save {
+  position: absolute;
+  padding: 15px 20px;
+  background-color: #FFD52E;
+  border: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+  cursor: pointer;
+}
+.delete {
+  padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: rgb(255, 0, 0);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px black;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+.edit {
+   padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: aliceblue;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px black;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 15px;
+}
+button:active {
+     transform: translateY(3px);
+     background-color: black;
+     color: aliceblue;
+}
+ .input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 22%;
+  }
+.clear-btn {
+ position: absolute;
+  top: 5px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.clear-btn:active {
+    background: rgba(255, 0, 0, 0.8);
+  color: aliceblue;
+}
+@media (max-width: 620px) {
+   .input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+ .input-wrapper textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 50px; 
+  min-height: 100px;
+}
+.save {
+    position: static; 
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 0;
+    padding: 12px;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  .clear-btn {
+    top: 6px;
+    right: 75px;
+  }
+}
