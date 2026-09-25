@@ -32,7 +32,8 @@ const days = [
     
     setCurrentDate(new Date(year, month - 1, 1))
   }
-  const firstDayIndex = new Date(currentDated.getFullYear(), currentDated.getMonth(), 1).getDay()
+  const rawDayIndex = new Date(currentDated.getFullYear(), currentDated.getMonth(), 1).getDay();
+  const firstDayIndex = rawDayIndex === 0 ? 6 : rawDayIndex - 1;
     const Month = new Date(currentDated.getFullYear(), currentDated.getMonth() + 1, 0).getDate()
     const monthArray = Array.from({ length: Month, }, (_, index) => index + 1);
     const daysArray = [...Array(firstDayIndex).fill(null), ...monthArray]
