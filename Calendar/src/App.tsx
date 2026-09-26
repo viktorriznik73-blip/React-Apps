@@ -11,8 +11,8 @@ export default function App() {
     return savedTasks ? JSON.parse(savedTasks) : {}
   })
   const [taskText, setTaskText] = useState('');
-  const [editingCellKey, setEditingCellKey] = useState<null>(null)
-  const [editingIndex, setEditingIndex] = useState<null>(null)
+  const [editingCellKey, setEditingCellKey] = useState<string | null>(null)
+  const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editText, setEditText] = useState<string>('');
   const months = [
   { id: 1, name: 'January',  },
@@ -86,8 +86,8 @@ useEffect(() => {
 <button onClick={handleNextMonth} className='next'>Next Month</button>
   <h3>Adding Tasks for Date: {selectedDate.toLocaleDateString()}</h3>
       <form onSubmit={handleAddTask}>
-        <input type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder='Add Task...'/>
-              <input type="submit" placeholder='+'/>
+        <input className='input2' type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder='Add Task...'/>
+              <input type="submit" placeholder='+' className='submit'/>
               </form>
 
 <div className='grid'>
