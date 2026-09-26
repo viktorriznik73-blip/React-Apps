@@ -76,3 +76,62 @@ background-color: transparent;
   border: 2px solid aliceblue;
   box-shadow: 0 10px 20px aliceblue;
 }
+
+.edit, .delete, .save {
+   padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: aliceblue;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px black;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin: 4px auto;
+}
+
+.delete {
+    background-color: rgb(255, 0, 0);
+}
+
+.save {
+    background-color: aliceblue;
+}
+
+.edit {
+    background-color: rgb(4, 251, 107);
+}
+
+ul {
+    list-style-type: none;  
+    padding: 0;
+    margin: 5px 0 0 0;
+}
+
+li {
+    font-size: 13px;
+    margin-bottom: 5px;
+    word-break: break-word; 
+}
+.input {
+   border: none;
+   border-radius: 20px;
+   background-color: #3F51B5;
+   padding: 5px 10px;
+   transition: all 0.3s ease;
+   outline: none;
+margin-right: 20px;
+width: 200px;
+height: 30px;
+box-shadow: 0 5px 10px black;
+flex-grow: 1;
+box-sizing: border-box;
+}
+.input::placeholder {
+    color: white;
+}
+.input:hover {
+  transform: scale(1.03);
+  background-color: black;
+}
