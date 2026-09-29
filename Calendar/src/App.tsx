@@ -46,14 +46,24 @@ useEffect(() => {
     
     setCurrentDate(new Date(year, month - 1, 1))
   }
-  const handleAddTask = (e: React.FormEvent): void => {
-    e.preventDefault();
+  const handleAddTask = (e?: React.FormEvent | React.SyntheticEvent) => {
+    if (e) {
+      e.preventDefault()
+  }
+  if(!taskText.trim()) return;
   setTasksDate({
     ...tasksDate,
     [datekey]: [...(tasksDate[datekey] || []), taskText]
-  })
-  setTaskText('')
+  });
+  
+  setTaskText(''); 
+};
+const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault()
+    handleAddTask();
   }
+}
   const handleDeleteTask = (cellkey: string, taskIndex: number) => {
     setTasksDate({
       ...tasksDate,
@@ -71,6 +81,7 @@ useEffect(() => {
     setEditingIndex(null);
     setEditText('')
   }
+
   const datekey = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
   const rawDayIndex = new Date(currentDated.getFullYear(), currentDated.getMonth(), 1).getDay();
   const firstDayIndex = rawDayIndex === 0 ? 6 : rawDayIndex - 1;
@@ -86,7 +97,8 @@ useEffect(() => {
 <button onClick={handleNextMonth} className='next'>Next Month</button>
   <h3>Adding Tasks for Date: {selectedDate.toLocaleDateString()}</h3>
       <form onSubmit={handleAddTask}>
-        <input className='input2' type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder='Add Task...'/>
+        <input onKeyDown={handleKeyDown}
+   className='input2' type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder='Add Task...'/>
               <input type="submit" placeholder='+' className='submit'/>
               </form>
 
@@ -121,7 +133,13 @@ useEffect(() => {
           className='input' 
             type="text" 
             value={editText} 
-            onChange={(e) => setEditText(e.target.value)} 
+            onChange={(e) => setEditText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                 e.preventDefault();
+                 handleSaveEdit(cellKey, taskIndex)
+              }
+            }} 
           />
           <button className="save" onClick={() => handleSaveEdit(cellKey, taskIndex)}>Save</button>
         </div>
@@ -157,4 +175,6 @@ useEffect(() => {
       </div>
       </div>
   )
+
+
 }
