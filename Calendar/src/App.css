@@ -157,7 +157,7 @@ box-sizing: border-box;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
-    margin: 4px auto;
+    margin: 2px;
 }
 .input::placeholder {
     color: white;
@@ -177,6 +177,39 @@ box-sizing: border-box;
      transform: translateY(3px);
      background-color: black;
      color: aliceblue;
+}
+.time {
+   padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: #cde709;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px black;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+font-family: "Work Sans", sans-serif;
+}
+.edit-time {
+ padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: #cde709;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px black;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px;
+font-family: "Work Sans", sans-serif;
+}
+.list {
+  word-break: break-word;
+  color: black; 
+  font-size: 13px;
+font-family: "DM Sans", sans-serif;
 }
 @media (max-width: 600px) {
   .grid {
@@ -213,7 +246,13 @@ box-sizing: border-box;
     font-size: 16px;
     box-sizing: border-box;
   }
-
+.edit-time {
+    width: 100%;
+    padding: 1px;
+    margin: 1px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
   form input[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -233,7 +272,6 @@ ul {
     border-radius: 4px;
   }
 
-  /* Делаем кнопки в ячейке совсем миниатюрными для пальцев */
   .edit, .delete, .save {
     padding: 2px 6px;
     font-size: 9px;

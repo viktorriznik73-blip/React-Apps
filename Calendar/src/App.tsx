@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 interface TaskState {
-  [key: string]: string[]
+  [key: string]: TaskItem[],
+}
+interface TaskItem {
+  text: string,
+  reminder?: string
 }
 export default function App() {
   const [currentDated,setCurrentDate] = useState<Date>(new Date())
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const [taskTime, setTaskTime] = useState('')
   const [tasksDate, setTasksDate] = useState<TaskState>(() => {
     const savedTasks = localStorage.getItem('calendar_tasks');
     return savedTasks ? JSON.parse(savedTasks) : {}
@@ -14,6 +19,7 @@ export default function App() {
   const [editingCellKey, setEditingCellKey] = useState<string | null>(null)
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editText, setEditText] = useState<string>('');
+   const [editTime, setEditTime] = useState<string>('');
   const months = [
   { id: 1, name: 'January',  },
   { id: 2, name: 'February',  },
@@ -31,6 +37,28 @@ export default function App() {
 const days = [
   'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
 ]
+
+useEffect(() => {
+   if (Notification.permission !== 'granted') {
+    Notification.requestPermission()
+   }
+const interval = setInterval(() => {
+  const now = new Date();
+const hours = String(now.getHours()).padStart(2, '0');
+const minutes = String(now.getMinutes()).padStart(2, '0');
+const currentTime = `${hours}:${minutes}`
+const todayKey = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+  const todayTasks = tasksDate[todayKey] || [];
+  todayTasks.forEach((task) => {
+    if (task.reminder === currentTime && Notification.permission === 'granted') {
+      new Notification(task.text, {
+        body: `Time: ${task.reminder}`,
+      })
+    }
+  })
+}, 60000)
+return () => clearInterval(interval)
+}, [tasksDate])
 useEffect(() => {
   localStorage.setItem('calendar_tasks', JSON.stringify(tasksDate))
 }, [tasksDate])
@@ -53,10 +81,11 @@ useEffect(() => {
   if(!taskText.trim()) return;
   setTasksDate({
     ...tasksDate,
-    [datekey]: [...(tasksDate[datekey] || []), taskText]
+    [datekey]: [...(tasksDate[datekey] || []), { text: taskText, reminder: taskTime }]
   });
   
   setTaskText(''); 
+  setTaskTime('')
 };
 const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
@@ -72,7 +101,11 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
   }
   const handleSaveEdit = (cellkey: string, taskIndex: number) => {
     const updateTasks = [...tasksDate[cellkey]];
-    updateTasks[taskIndex] = editText;
+    updateTasks[taskIndex] = {
+      ...updateTasks[taskIndex],
+      text: editText,
+      reminder: editTime
+    };
     setTasksDate({
       ...tasksDate,
       [cellkey]: updateTasks
@@ -80,6 +113,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setEditingCellKey(null);
     setEditingIndex(null);
     setEditText('')
+    setEditTime('')
   }
 
   const datekey = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
@@ -99,6 +133,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       <form onSubmit={handleAddTask}>
         <input onKeyDown={handleKeyDown}
    className='input2' type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder='Add Task...'/>
+              <input className='time' type="time" value={taskTime}  onChange={(e) => setTaskTime(e.target.value)}/>
               <input type="submit" placeholder='+' className='submit'/>
               </form>
 
@@ -141,19 +176,24 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
               }
             }} 
           />
+          <input className='edit-time' type="time" value={editTime} onChange={(e) => setEditTime(e.target.value)} onKeyDown={(e) => {
+              if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                 e.preventDefault();
+                 handleSaveEdit(cellKey, taskIndex)
+              }
+            }} />
           <button className="save" onClick={() => handleSaveEdit(cellKey, taskIndex)}>Save</button>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {/* Текст задачи теперь идет первым и занимает свою строку */}
-          <span style={{ wordBreak: 'break-word', color: 'black', fontSize: '20px' }}>{task}</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <span className='list'>{task.text}, {task.reminder}</span>
           
-          {/* Контейнер для кнопок под текстом */}
           <div>
             <button className="edit" onClick={() => {
               setEditingCellKey(cellKey);
               setEditingIndex(taskIndex);
-              setEditText(task);
+              setEditText(task.text);
+              setTaskTime(task.reminder || '')
             }}>
               Edit
             </button>
