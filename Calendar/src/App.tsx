@@ -148,10 +148,22 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
             day === new Date().getDate() &&
             currentDated.getMonth() === new Date().getMonth() &&
             currentDated.getFullYear() === new Date().getFullYear();
-
+const isSelected = 
+day !== null &&
+selectedDate.getDate() === day &&
+selectedDate.getMonth() === currentDated.getMonth() &&
+      selectedDate.getFullYear() === currentDated.getFullYear();
           return ( 
             <div 
-              className={day === null ? 'empty-cell' : isToday ? 'today' : 'days'} 
+              className={
+          day === null 
+            ? 'empty-cell' 
+            : isSelected 
+            ? 'selected-day' 
+            : isToday 
+            ? 'today' 
+            : 'days'
+        }
               key={index} onClick={() => {if (day !== null) {setSelectedDate(new Date(currentDated.getFullYear(), currentDated.getMonth(), day))}}}
             >
               {day}

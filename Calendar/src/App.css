@@ -211,6 +211,13 @@ font-family: "Work Sans", sans-serif;
   font-size: 13px;
 font-family: "DM Sans", sans-serif;
 }
+.selected-day {
+   background-color: #1967D2; 
+  padding: 20px;
+  color: aliceblue;
+  border: 2px solid aliceblue;
+  box-shadow: 0 10px 20px aliceblue;
+}
 @media (max-width: 600px) {
   .grid {
   gap: 3px; 
