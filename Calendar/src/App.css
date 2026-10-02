@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kameron:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 body {
- display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: black;
+  margin: 0;
+  padding: 10px;
+  background-color: black;
+  min-height: 100vh;
+  display: flex; 
+  box-sizing: border-box;
 }
 h3 {
   font-family: "Lato", sans-serif;
@@ -14,6 +14,16 @@ h3 {
 span {
    font-family: "Lato", sans-serif;
    color: aliceblue;
+}
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 0 5px;
 }
 .grid {
     background-color: rgb(0, 0, 0);
@@ -32,30 +42,26 @@ span {
   border: 2px solid aliceblue;
 }
 .next {
-  padding: 8px 20px;
-    border-radius: 50px;
-    border: 2px solid aliceblue;
-    background-color: #039BE5;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px black;
-    color: black;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    margin-left: 15px;
+padding: 8px 16px;
+  border-radius: 50px;
+  border: 2px solid aliceblue;
+  background-color: #039BE5;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 0;
+transition: all 0.3s ease;
 }
 .prev {
-   padding: 8px 20px;
-    border-radius: 50px;
-    border: 2px solid aliceblue;
-    background-color: #039BE5;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px black;
-    color: black;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-  margin-right: 15px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 2px solid aliceblue;
+  background-color: #039BE5;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 0;
+transition: all 0.3s ease;
 }
 button:active {
      transform: translateY(3px);
@@ -230,6 +236,7 @@ font-family: "DM Sans", sans-serif;
     font-size: 12px;   
     padding: 2px;
   }
+
   .grid .day {
     font-size: 11px;
     padding: 4px 0;

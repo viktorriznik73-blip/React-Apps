@@ -8,12 +8,18 @@ interface TaskItem {
   reminder?: string
 }
 export default function App() {
+
   const [currentDated,setCurrentDate] = useState<Date>(new Date())
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [taskTime, setTaskTime] = useState('')
   const [tasksDate, setTasksDate] = useState<TaskState>(() => {
+    try {
     const savedTasks = localStorage.getItem('calendar_tasks');
     return savedTasks ? JSON.parse(savedTasks) : {}
+    } catch (e) {
+    console.error("Ошибка чтения localStorage:", e);
+      return {};
+    }
   })
   const [taskText, setTaskText] = useState('');
   const [editingCellKey, setEditingCellKey] = useState<string | null>(null)
@@ -39,9 +45,11 @@ const days = [
 ]
 
 useEffect(() => {
+  if (typeof window !== 'undefined' && 'Notification' in window) {
    if (Notification.permission !== 'granted') {
     Notification.requestPermission()
    }
+  }
 const interval = setInterval(() => {
   const now = new Date();
 const hours = String(now.getHours()).padStart(2, '0');
@@ -50,7 +58,7 @@ const currentTime = `${hours}:${minutes}`
 const todayKey = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
   const todayTasks = tasksDate[todayKey] || [];
   todayTasks.forEach((task) => {
-    if (task.reminder === currentTime && Notification.permission === 'granted') {
+    if (task.reminder === currentTime && typeof window !== 'undefined' && Notification.permission === 'granted') {
       new Notification(task.text, {
         body: `Time: ${task.reminder}`,
       })
@@ -122,13 +130,16 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const Month = new Date(currentDated.getFullYear(), currentDated.getMonth() + 1, 0).getDate()
     const monthArray = Array.from({ length: Month, }, (_, index) => index + 1);
     const daysArray = [...Array(firstDayIndex).fill(null), ...monthArray]
+    
   return (
     <div>
-      <button onClick={handlePrevMonth} className='prev'>Prev Month</button>
-<span>
-{months[currentDated.getMonth()].name} {[currentDated.getFullYear()]}
-</span>
-<button onClick={handleNextMonth} className='next'>Next Month</button>
+      <div className="calendar-nav">
+  <button onClick={handlePrevMonth} className='prev'>Prev Month</button>
+  <span>
+    {months[currentDated.getMonth()].name} {currentDated.getFullYear()}
+  </span>
+  <button onClick={handleNextMonth} className='next'>Next Month</button>
+</div>
   <h3>Adding Tasks for Date: {selectedDate.toLocaleDateString()}</h3>
       <form onSubmit={handleAddTask}>
         <input onKeyDown={handleKeyDown}
