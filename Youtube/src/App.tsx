@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi';
+import { FiShare2 } from 'react-icons/fi';
+import { useState, useEffect} from 'react'
 import './App.css'
 
 interface Videos {
@@ -6,12 +8,110 @@ interface Videos {
   title: string,
   link: string,
  thumbnail: string;
+ userLiked?: boolean;   
+  userDisliked?: boolean;
+  likes?: number,
+  dislikes?: number
 }
 export default function WatchVideos() {
   const [videos, setVideos] = useState<Videos[]>([]);
   const [currentVideo, setCurrentVideo] = useState<Videos | null>();
   const [text, setText] = useState<string>("");
   const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null)
+const savedVideos = localStorage.getItem('youtube-videos');
+const initialVideos = savedVideos ? JSON.parse(savedVideos) : [{ 
+    id: 1, 
+    title: 'CS50x in Spanish The - End', 
+    link: 'https://www.youtube.com/embed/0IjFxHxs88c', 
+    thumbnail: 'https://i.ytimg.com/vi/GHZzYAy4NKA/hq720.jpg',
+    likes: 12,
+    dislikes: 1,
+    userLiked: false,
+    userDisliked: false
+  },
+  { 
+    id: 2, 
+    title: 'CS50x in Spanish - Introduction', 
+    link: 'https://www.youtube.com/embed/hKpAHgT9VxM', 
+    thumbnail: 'https://i.ytimg.com/vi/hKpAHgT9VxM/maxresdefault.jpg',
+    likes: 45,
+    dislikes: 2,
+    userLiked: false,
+    userDisliked: false
+  }]
+  useEffect(() => {
+    localStorage.setItem('youtube_videos', JSON.stringify(videos))
+  }, [videos])
+
+ const handleLike = () => {
+    if (!currentVideo) return;
+    
+    const updatedVideos = videos.map(video => {
+      if (video.id === currentVideo.id) {
+        let newLikes = video.likes ?? 0;
+        let newDislikes = video.dislikes ?? 0;
+        let newLikedState = !video.userLiked;
+        let newDislikedState = video.userDisliked;
+
+        if (newLikedState) {
+          newLikes += 1;
+          if (video.userDisliked) {
+            newDislikes -= 1;
+            newDislikedState = false;
+          }
+        } else {
+          newLikes -= 1;
+        }
+
+        const updated = {
+          ...video,
+          likes: newLikes,
+          dislikes: newDislikes,
+          userLiked: newLikedState,
+          userDisliked: newDislikedState,
+        };
+        setCurrentVideo(updated);
+        return updated;
+      }
+      return video;
+    });
+    setVideos(updatedVideos);
+  };
+
+  const handleDisLike = () => {
+    if (!currentVideo) return;
+
+    const updatedVideos = videos.map(video => {
+      if (video.id === currentVideo.id) {
+        let newLikes = video.likes ?? 0;
+        let newDislikes = video.dislikes ?? 0;
+        let newLikedState = video.userLiked;
+        let newDislikedState = !video.userDisliked; 
+
+        if (newDislikedState) {
+          newDislikes += 1;
+          if (video.userLiked) {
+            newLikes -= 1;
+            newLikedState = false;
+          }
+        } else {
+          newDislikes -= 1;
+        }
+
+        const updated = {
+          ...video,
+          likes: newLikes,
+          dislikes: newDislikes,
+          userLiked: newLikedState,
+          userDisliked: newDislikedState,
+        };
+        setCurrentVideo(updated);
+        return updated;
+      }
+      return video;
+    });
+    setVideos(updatedVideos);
+  };
   const handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 if (text === null) return;
 setText(e.target.value)
@@ -21,26 +121,19 @@ setText(e.target.value)
   }
   useEffect(() => {
 
-    const fetchedVideo: Videos[] = [
-      { 
-        id: 1, 
-        title: 'CS50x in Spanish The - End', 
-        link: 'https://www.youtube.com/embed/0IjFxHxs88c', 
-        thumbnail: 'https://i.ytimg.com/vi/GHZzYAy4NKA/hq720.jpg' 
-      },
-      { 
-        id: 2, 
-        title: 'CS50x in Spanish - Introduction', 
-        link: 'https://www.youtube.com/embed/hKpAHgT9VxM', 
-        thumbnail: 'https://i.ytimg.com/vi/hKpAHgT9VxM/maxresdefault.jpg'
-      }
-    ];
-setVideos(fetchedVideo)
-setCurrentVideo(fetchedVideo[0])
+   
+setVideos(initialVideos)
+setCurrentVideo(initialVideos[0])
   }, [])
   const filteredVideos = videos.filter(video => 
     video.title.toLowerCase().includes(text.toLowerCase())
   )
+  const handleShare = () => {
+    if (currentVideo) {
+      navigator.clipboard.writeText(currentVideo.link);
+      alert('You have copied link!')
+    }
+  }
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'sans-serif' }}>
       <h1>Youtube</h1>
@@ -60,7 +153,7 @@ setCurrentVideo(fetchedVideo[0])
     <iframe 
       src={currentVideo.link} 
       title={currentVideo.title}
-      style={{ width: '100%', height: '100%', border: 'none', position: 'relative', zIndex: 2 }}
+      style={{ width: '700px', height: '100%', border: 'none', position: 'relative', zIndex: 2 }}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
       allowFullScreen
     />
@@ -71,6 +164,33 @@ setCurrentVideo(fetchedVideo[0])
   </div>
 )}
     <h2>{currentVideo ? currentVideo.title : "Videos"}</h2>
+   <div style={{ display: 'flex', gap: '15px', marginTop: '10px', alignItems: 'center' }}>
+  
+  <button 
+    onClick={handleLike}
+    style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', cursor: 'pointer', borderRadius: '20px', border: '1px solid #ccc', background: '#0F0F0F' }}
+  >
+    {currentVideo?.userLiked ? <BiSolidLike size={20} color="#FFFFFF" /> : <BiLike size={20} />}
+    <span>{currentVideo?.likes}</span>
+  </button>
+
+  <button 
+    onClick={handleDisLike}
+    style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', cursor: 'pointer', borderRadius: '20px', border: '1px solid #ccc', background: '#0F0F0F' }}
+  >
+    {currentVideo?.userDisliked ? <BiSolidDislike size={20} color="#FFFFFF" /> : <BiDislike size={20} />}
+    <span>{currentVideo?.dislikes}</span>
+  </button>
+
+  <button 
+    onClick={handleShare}
+    style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', cursor: 'pointer', borderRadius: '20px', border: '1px solid #ccc', background: '#0F0F0F' }}
+  >
+    <FiShare2 size={20} />
+    <span>Share</span>
+  </button>
+
+</div>
    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {filteredVideos.map(video => (
         <div key={video.id} 
@@ -92,7 +212,7 @@ setCurrentVideo(fetchedVideo[0])
               
               <div style={{ 
                 width: '120px', 
-                height: '68px',
+                height: '60px',
                 backgroundImage: `url(${video.thumbnail})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center', 
