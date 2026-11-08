@@ -6,6 +6,7 @@ interface Anime {
   image?: string,
   genre: string,
   status: 'reading' | 'planned' | 'completed'
+  url?: string
 }
 export default function SearchMedia() {
   const [titles, setTitles] = useState<Anime[]>([]);
@@ -37,12 +38,12 @@ const handleChange = (e: any) => {
         name: item.title,
         genre: '',
         status: 'planned' as const,
-        image: item.images?.jpg?.image_url
+        image: item.images?.jpg?.image_url,
+        url: item.url
       };
     });
     setTitles(mappedTitles);
       } catch (err: any) {
-      // Если API недоступен или сработал таймаут — включаем фоллбек на моки
       console.warn('API недоступен, переключаемся на моковые данные:', err.message)
       
       const mockTitles: Anime[] = [
@@ -51,14 +52,16 @@ const handleChange = (e: any) => {
           name: `${searchQuery || 'Quintessential-Quintuplets'}`,
           genre: 'Comedy',
           status: 'reading',
-          image: 'https://static.yani.tv/posters/huge/1636926847.avif'
+          image: 'https://static.yani.tv/posters/huge/1636926847.avif',
+          url: 'https://myanimelist.net/manga/103851/Gotoubun_no_Hanayome'
         },
         {
           id: 2,
-          name: 'The Fragrant Flower Blooms with Dignity',
+          name: `${searchQuery || 'The Fragrant Flower Blooms with Dignity' }`,
           genre: 'Romantic comedy',
           status: 'planned',
-          image: 'https://shikimori.io/uploads/poster/animes/59845/main_2x-a4fda62f6583f18bad6c6b5b6044904a.webp'
+          image: 'https://shikimori.io/uploads/poster/animes/59845/main_2x-a4fda62f6583f18bad6c6b5b6044904a.webp',
+url: 'https://myanimelist.net/manga/144267/Kaoru_Hana_wa_Rin_to_Saku'
         }
       ]
 
@@ -79,21 +82,41 @@ const updatedTitles = titles.map(item => {
 setTitles(updatedTitles)
 }
     
-  return (
+ return (
     <div className='div1'>
-      <input type="text" onChange={handleChange} onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          fetchMedia('manga')
-        }
-      }} placeholder='Search...' value={searchQuery}/>
+      <input 
+        type="text" 
+        value={searchQuery}
+        onChange={handleChange} 
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            fetchMedia('manga')
+          }
+        }} 
+        placeholder='Search...'
+      />
       {isLoading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-    <div className="results-container">
+
+      <div className="results-container">
         {titles.map(item => (
           <div key={item.id} className="anime-card" style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
             {item.image && <img src={item.image} alt={item.name} width="100" />}
             <h3>{item.name}</h3>
             <p>Status: {item.status}</p>
+
+            {item.url && (
+              <div style={{ marginBottom: '10px' }}>
+                <a 
+                  href={item.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ color: '#1a0dab', textDecoration: 'underline' }}
+                >
+              Open on MyAnimeList
+                </a>
+              </div>
+            )}
             
             <div className="status-buttons">
               <button onClick={() => handleStatusChange(item.id, 'reading')}>
@@ -103,7 +126,7 @@ setTitles(updatedTitles)
                 Completed
               </button>
               <button onClick={() => handleStatusChange(item.id, 'planned')}>
-              Planned
+                Planned
               </button>
             </div>
           </div>
