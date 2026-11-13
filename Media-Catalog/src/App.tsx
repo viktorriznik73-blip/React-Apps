@@ -34,7 +34,31 @@ export default function SearchMedia() {
           status: 'planned',
           image: 'https://shikimori.io/uploads/poster/animes/59845/main_2x-a4fda62f6583f18bad6c6b5b6044904a.webp',
 url: 'https://myanimelist.net/manga/144267/Kaoru_Hana_wa_Rin_to_Saku'
-        }
+        },
+       {
+          id: 3,
+          name: 'My Dress-Up Darling',
+          genre: 'Romance',
+          status: 'planned',
+          image: 'https://cdn.myanimelist.net/images/manga/2/215054.jpg',
+url: 'https://myanimelist.net/manga/112268/Sono_Bisque_Doll_wa_Koi_wo_Suru'
+        },
+        {
+          id: 4,
+          name: 'Alya Sometimes Hides Her Feelings in Russian',
+          genre: 'Comedy, Romance',
+          status: 'planned',
+          image: 'https://images.kinorium.com/movie/poster/11076833/w1500_52559778.jpg',
+url: 'https://myanimelist.net/manga/134341/Tokidoki_Bosotto_Russia-go_de_Dereru_Tonari_no_Alya-san'
+        }, 
+        {
+          id: 5,
+          name: 'The Angel Next Door Spoils Me Rotten',
+          genre: 'Romance',
+          status: 'planned',
+          image: 'https://cdn.myanimelist.net/images/anime/1240/133638.jpg',
+url: 'https://myanimelist.net/anime/50739/Otonari_no_Tenshi-sama_ni_Itsunomanika_Dame_Ningen_ni_Sareteita_Ken'
+        },
     ]
   })
   const [searchQuery, setSearchQuery] = useState<string>('');
